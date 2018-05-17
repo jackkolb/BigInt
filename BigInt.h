@@ -9,10 +9,10 @@
 
 
 class BigInt {
-private:
+public:
     std::vector<int> number;  // holds all the digits (ex: {1, 3, 5})
     void initialize(std::string);  // Generates this BigInt's number vector from an std::string input
-public:
+
     unsigned int size() const;  // returns the size (number of digits) of the BigInt
     bool negative = false;  // By default, the BigInt is not set to be negative
 
@@ -59,7 +59,6 @@ public:
 
     std::string to_string();  // returns this BigInt as a string
 };
-
 
 // Comparisan Operator declarations
 inline bool operator==(BigInt lhs, const BigInt& rhs);
