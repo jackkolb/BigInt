@@ -2,6 +2,8 @@
 
 Just an easy-to-use BigInt library that is, well, actually easy to use and has a bunch of useful functions
 
+I made this because other libaries I found are complicated to set up (this is just one file) or lack functions I wanted (pow, mod_pow, mod_inverse, gcd). Hopefully you can find use for this too :)
+
 ### Installation:
 
 Just place the "BigInt.h" file in your source directory (or sub directory) and include it in your script
