@@ -46,7 +46,7 @@ public:
     BigInt sqrt();  // returns the square root of this BigInt
     BigInt pow(BigInt);  // returns this BigInt to the power of another BigInt
     BigInt mod_pow(BigInt, BigInt);  // returns the modular power as a BigInt
-    BigInt modular_inverse(BigInt);  // returns the modular inverse of this BigInt
+    BigInt mod_inverse(BigInt);  // returns the modular inverse of this BigInt
     bool is_prime();  // returns true if this BigInt is prime, false if not
     BigInt gcd(BigInt);  // returns the greatest common denominator of this and another number
 
@@ -736,7 +736,7 @@ BigInt BigInt::gcd(BigInt b) {
 
 // adapted from 'www.geeksforgeeks.org'
 // returns the modular inverse using the Extended Euclidean Algorithm
-BigInt BigInt::modular_inverse(BigInt b) {
+BigInt BigInt::mod_inverse(BigInt b) {
     BigInt a = *this;  // reassignment as we change a
     BigInt b_initial = b;  // reserved in case x becomes negative
     BigInt x = 1;  // x = 1 because a and b are relatively prime
