@@ -74,3 +74,7 @@ a.to_long_long_int();   // returns the number as a long long int
 a.to_long_long_uint();  // returns the number as a long long unsigned int
 
 ```
+
+### Notes:
+
+For example code, check out test_bigint.cpp
