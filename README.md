@@ -80,3 +80,6 @@ a.to_long_long_uint();  // returns the number as a long long unsigned int
 ### Notes:
 
 For example code, check out test_bigint.cpp
+
+Most of the operations and functions are 
+quite fast, even with very large (2048-bit) numbers!

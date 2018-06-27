@@ -270,13 +270,14 @@ inline BigInt operator*(BigInt lhs, BigInt rhs) {
     return lhs;
 }
 
+using namespace std;
+
 
 // division using the long division algorithm
 BigInt& BigInt::operator/=(const BigInt& rhs) {
     // uses the long division algorithm to computer the division:
     //    _102_
     // 13|1326
-
     BigInt lhs = *this;
 
     // edge case: the outside is greater than the inside, result is zero (empty number)
@@ -292,16 +293,18 @@ BigInt& BigInt::operator/=(const BigInt& rhs) {
     BigInt remainder;
 
     BigInt test;  // the temporary, recycled variable that travels along the inside digits
-
     for (int i = 0; i < inside.size(); i++) {
-        test.number.push_back(inside.number.at(i)); // adds the next digit to the test variable
-        
+        if (!(test.size() == 0 && inside.number.at(i) == 0)) {
+            test.number.push_back(inside.number.at(i)); // adds the next digit to the test variable
+        }
+
         // edge case: test is nothing
         if (test.size() == 0) {
             result.number.push_back(0);
             test.number = {};
             continue;
         }
+
         // when test is less than the outside number (ex: the first operation of the example above, 1 < 13)
         if (test < outside) {
             result.number.push_back(0);
@@ -310,13 +313,16 @@ BigInt& BigInt::operator/=(const BigInt& rhs) {
         else {
             int counter = 0;
             BigInt temp = test; // temp will decrease until it is less than the outside, so we know the result digit
+
             while (outside <= temp) {
                 counter++;
                 temp = temp - outside;
+
                 if (temp == 0 && outside == 0) { break; } // redundancy edge case: it won't go lower than zero, so break there
+
             }
             result.number.push_back(counter);  // add the counter (aka the reult of this mini-division) to the result
-            
+    
             // whatever temp is now is the remainder, add this to test number
             remainder = temp;  
             test.number = {};
@@ -327,7 +333,6 @@ BigInt& BigInt::operator/=(const BigInt& rhs) {
             }
         }
     }
-
 
     BigInt filtered_result;  // filtered result will get rid of the excess zeros
 
@@ -356,7 +361,6 @@ inline BigInt operator/(BigInt lhs, BigInt rhs) {
     lhs /= BigInt(rhs);
     return lhs;
 }
-
 
 // modulo using division and remainder
 BigInt& BigInt::operator%=(const BigInt& rhs) {
@@ -404,9 +408,15 @@ BigInt::BigInt(const char* rhs) {
 
 // catchall initialization function: takes a string, assigns each character to the number vector
 void BigInt::initialize(std::string source) {
+
     number.resize(source.size());
     for (unsigned int i = 0; i < source.size(); i++) {
         number.at(i) = source.at(i) - '0';
+    }
+
+    // edge case: source = "0"
+    if (source == "0") {
+        number = {};
     }
     return;
 }
@@ -491,8 +501,13 @@ BigInt& BigInt::operator=(std::vector<int> rhs) {
 
 // outstream (ex: cout << BigInt)
 std::ostream& operator<<(std::ostream& os, const BigInt& rhs) {
-    for (int i : rhs.number) {
-        os << i;
+    if (rhs.size() == 0) {
+        os << "0";
+    }
+    else {
+        for (int i : rhs.number) {
+            os << i;
+        }
     }
     return os;  
 }  

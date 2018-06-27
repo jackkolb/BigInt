@@ -164,4 +164,7 @@ int main() {
     long long int i5 = BigInt("555555555").to_long_long_int(); cout << i5 << " ";
     long long unsigned int i6 = BigInt("5555555555555555555").to_long_long_uint(); cout << i6 << " ";
     cout << endl;
+
+    cout << BigInt("1234567890987654321234567890") + BigInt("12345") << endl;
+    cout << endl;
 }
